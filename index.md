@@ -1,6 +1,6 @@
  # Hello, world! I am Ryan Ding, a student in Professor Joe Politz's CSE 15L class Winter Quarter 2023! This is a Heading 1!  
 [Lab Report 1] (link) [Other page I made that has nothing on it] (link)  
-![Image] (index_image.jpg)
+![Image](index_image.jpg)
 _Italics use one underscore at the beginning and end of the phrase you want to italicize_  
 __Bolding is similar, but two underscores are used__  
 *Italics* and **Bold** underscores can also use the star -> * symbol instead of the underscores!  
