@@ -22,17 +22,24 @@ Again, this step is insanely simple in the fact that all you need to do is insta
 At this point, everything should be functional and setup correctly. If your attempt to access the Secure Shell in the next section does not work when you are asked to enter your password, you should consider changing your password using the instructions for resetting your password above.  
 <br>
 Moving on, open an integrated terminal by clicking Terminal:  
-![Image]()  
+![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/e65307456bc38ddcf2ac02c826d2df247d4539f6/terminal1.png)  
 Then selecting New Terminal:  
-![Image](https://user-images.githubusercontent.com/110417507/212788519-076e36d4-2c84-45fd-91d8-a1466d454443.png)
+![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/43a56b480a4cefe538a7d4998474cefd1f5d5f7d/terminal2.png)  
+<br>
 After the terminal window is open, there are a few things that need to be done to use Git Bash, which is required to connect to the Secure Shell. 
 
 After all this, type `ssh [username]@ieng6.ucsd.edu` in order to enter the Secure Shell.  
-- If this is your first time doing such a connection, you will then be prompted with a question asking if you would like to continue to connect, to which you should type `yes` to.
+- If this is your first time doing such a connection, you will then be prompted with a question asking if you would like to continue to connect, to which you should type `yes` to.  
 Finally, enter the password that you created for the _cs15lxxxxyyy_ Educational Technology Services account in order to enter the Secure Shell.  
 - Note that keys you type will not show up on the screen as an added security measure; make sure you type your password in precisely!  
 
 Congrats, you are now inside the Secure Shell; you may now enter in a variety of commands that you would like to use! Here is a sample of some commands I used:  
-![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/56a69f044f3aa59723b81dff10841596dac07d45/command1.png))  
-I first ran ls -lat to list the -lat path. Then, I changed the directory from my personal directory to the parent directory, cs15lwi23, using “..”. I then printed the working directory to check the current working directory, and then tried to access Dylan’s directory from my terminal, which did not work as I did not have the permission. Finally, I changed the directory back to my own personal one and then printed the working directory out the final time to check my changes.
+![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/56a69f044f3aa59723b81dff10841596dac07d45/command1.png)  
+> Context: I first ran ls -lat to list the -lat path. Then, I changed the directory from my personal directory to the parent directory, cs15lwi23, using “..” (this changes the current directory to that of the parent directory). I then printed the working directory to the terminal to check it, and then tried to access my lab group member's directory from my terminal, which did not work, as anticipated, since I did not have the permission. Finally, I changed the directory back to my own personal one and then printed the working directory out the final time to check my changes.  
+
+Here are some interesting commands that you can start out with:
+- `cd`: changes the directory of the user  
+- `ls`: lists all the files in the user's current directory  
+- `cp`: copy files from one location to another  
+- `cat`: print a file to the terminal  
 
