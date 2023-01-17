@@ -1,6 +1,5 @@
 # Remotely Accessing a Course Specific Account on `ieng6`  
-## Lab Report 1 | Ryan Ding  
-> 10-15 minutes  
+## Lab Report 1 | Ryan Ding    
 ### 1. Install Visual Studio Code onto your computer!  
 This can be done rather easily by going to the [Visual Studio Code](https://code.visualstudio.com/download) website and downloading the software onto your computer. Remember to choose the version appropriate to your computer's operating system. For the sake of this tutorial, it will mainly be regarding the Windows installation of VS Code.  
 <br>
