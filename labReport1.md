@@ -11,17 +11,16 @@ Again, this step is insanely simple in the fact that all you need to do is insta
 ![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/364b1c4b5e5db4a453a6e2201594d8a5dbaa5458/git%20snippet.png)  
 ***
 #### Before continuing ahead...  
-- Make sure that you have a valid CSE 15L account from Educational Technology Services by going to [this](https://sdacs.ucsd.edu/~icc/index.php) link:  
+- Make sure that you have a valid CSE 15L account from Educational Technology Services by going to [this](https://sdacs.ucsd.edu/~icc/index.php) link and looking up your account:  
 ![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/23d554e008ee5cd850d088ca3390d46d66b5c796/ets%20snippet%201.png)      
-- Looking up your account:  
-![Image]()  
 - Make sure that you have an account under the title of **cs15l**_xxxxyyy_, where _xxxx_ signifies the term you are on (for instance, the winter 2023 quarter would be _wi23_) and _yyy_ signifies your unique student login.   
+![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/eb75c84b432c15800c0a486342d966a5cfa29abb/ets%20snippet%202.png)
 #### Resetting your password  
 
 ***
 ### 3. Remotely connect to the server via the integrated terminal!  
-At this point, everything should be functional and setup correctly. If anything, the only thing that should potentially be dysfunctional is your CSE 15L account, in which case you would need to [reset your password](). The protocol is rather lengthy to 
-
+At this point, everything should be functional and setup correctly. If your attempt to access the Secure Shell in the next section does not work when you are asked to enter your password, you should consider changing your password using the instructions for resetting your password above.  
+<br>
 Moving on, open an integrated terminal by clicking Terminal:  
 ![Image]()  
 Then selecting New Terminal:  
@@ -34,5 +33,6 @@ Finally, enter the password that you created for the _cs15lxxxxyyy_ Educational 
 - Note that keys you type will not show up on the screen as an added security measure; make sure you type your password in precisely!  
 
 Congrats, you are now inside the Secure Shell; you may now enter in a variety of commands that you would like to use! Here is a sample of some commands I used:  
-![Image]()  
+![Image](https://github.com/ryanDing26/cse15l-lab-reports/blob/56a69f044f3aa59723b81dff10841596dac07d45/command1.png))  
+I first ran ls -lat to list the -lat path. Then, I changed the directory from my personal directory to the parent directory, cs15lwi23, using “..”. I then printed the working directory to check the current working directory, and then tried to access Dylan’s directory from my terminal, which did not work as I did not have the permission. Finally, I changed the directory back to my own personal one and then printed the working directory out the final time to check my changes.
 
