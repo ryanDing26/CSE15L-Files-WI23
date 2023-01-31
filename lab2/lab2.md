@@ -1,4 +1,4 @@
-# Lab Report 2 (Week 3)  
+# Lab Report 2 | Ryan Ding
 ## Part 1: StringServer
 Code for StringServer.java:  
 ```
