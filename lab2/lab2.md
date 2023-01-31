@@ -177,4 +177,4 @@ static void reverseInPlace(int[] arr) {
 
 ## Part 3: Learning Outcomes  
 For me, I was entirely new to the concept of servers, and fairly new to JUnit testing of code. In fact, the first that I had heard of it was the course that we were required to concurrently enroll in with CSE 15L, CSE 12, this quarter. In terms of other things that I learned, working with GitHub Desktop for the first time was really nice, as I did not know it would be so easy to commit and push changes to my code in repositories to the website. The servers were the most interesting part of these past two weeks, and I hope that I am able to work more with them in the future as they are loads of fun to play with in general.  
-# Happy Coding
+# Happy Coding!
