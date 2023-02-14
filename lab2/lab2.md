@@ -1,22 +1,25 @@
 # Lab Report 2 | Ryan Ding
 ## Part 1: StringServer
 Code for StringServer.java:  
-```
+``` 
 import java.io.IOException;
 import java.net.URI;
-
+import java.util.ArrayList;
 
 class Handler implements URLHandler {
     // The one bit of state on the server: a number that will be manipulated by
     // various requests.
-    String[] words = new String[1000];
+    
+    // (REVISION) The ArrayList object ensures that the words list can expand in size to
+    // however large it needs.
+    ArrayList<String> words = new ArrayList<String>();
     int size = 0;
 
     public String handleRequest(URI url) {
         String printedWords = "";
         if (url.getPath().equals("/")) {
             for(int i = 0; i < size; i++) {
-                printedWords = printedWords.concat(words[i]);
+                printedWords = printedWords.concat((String)words.get(i));
                 printedWords = printedWords.concat("\n");
             }
             return printedWords;
@@ -24,15 +27,10 @@ class Handler implements URLHandler {
             if (url.getPath().contains("/add-message")) {
                 String[] parameters = url.getQuery().split("=");
                 if (parameters[0].equals("s")) {
-                    for(int i = 0; i < words.length; i++) {
-                        if (words[i] == null) {
-                            words[i] = parameters[1];
-                            size++;
-                            break;
-                        }
-                    }
+                    words.add(parameters[1]);
+                    size++;
                     for(int i = 0; i < size; i++) {
-                        printedWords = printedWords.concat(words[i]);
+                        printedWords = printedWords.concat((String)words.get(i));
                         printedWords = printedWords.concat("\n");
                     }
                     return printedWords;
@@ -115,7 +113,7 @@ public class Server {
 ### Usages
 #### Sample 1: /add-message?s=Ryan  
 ![Image](./images/sample1.JPG) 
-What this did is that it added my name, Ryan, to the array of messages present within the code. First and foremost, the server was booted up with port 4000 on the local host. In the handler class, the getPath method was invoked on the URI `url` object, checking that the path was simply "/", meaning that no query was made. In our case, the path was more than the "/", so the else part of the if-else statement executed. It then checked if the path contained "/add-message", as it was needed to specify that a certain string was to be added to the display. It also needed to check for the query string, and split the two halves of the "s=Ryan" url by its delimiter "=" (Note: getQuery takes into account the url right after the question mark symbol). Whatever was after the equals sign was the string assigned to the string array words (which is shown as parameters[1] in the code), and the size integer variable was incremented by one to indicate that another string was added to the list of words, being displayed on the screen in the process as the contents of the array were returned to the function and printed on the local host screen.
+What this did is that it added my name, Ryan, to the array of messages present within the code. First and foremost, the server was booted up with port 4000 on the local host. (REVISION) A port is used to communicate between a web server, the browser, and the client, the Java files that run the web server. In giving it a unique number, this allows for the communication to occur by helping the network reach a particular endpoint. In the handler class, the getPath method was invoked on the URI `url` object, checking that the path was simply "/", meaning that no query was made. In our case, the path was more than the "/", so the else part of the if-else statement executed. It then checked if the path contained "/add-message", as it was needed to specify that a certain string was to be added to the display. It also needed to check for the query string, and split the two halves of the "s=Ryan" url by its delimiter "=" (Note: getQuery takes into account the url right after the question mark symbol). Whatever was after the equals sign was the string assigned to the string array words (which is shown as parameters[1] in the code), and the size integer variable was incremented by one to indicate that another string was added to the list of words, being displayed on the screen in the process as the contents of the array were returned to the function and printed on the local host screen.
 #### Sample 2: /add-message?s=1234  
 ![Image](./images/sample2.JPG)  
 While appearing to be an integer instead of a string value, it actually reads the number 1234 as the string literal, "1234", into the words string array and went through quite literally the exact same process as the first sample. In a way, adding any message to the words array will change the size variable by incrementing it by one, the words array (by adding a new non-null element to it), and the printedWords variable (based off the contents of the words array).
@@ -154,7 +152,7 @@ Symptoms of the testReverseInPlace (No failures):
 Symptoms of the testReverseInPlaceEven and testReverseInPlaceOdd (failures):  
 ![Image](./images/test2.JPG)  
 **Why the failure-inducing inputs failed (expected vs actual values)**: For testReverseInPlaceOdd, the 
-The only test that was able to pass with the initial code was testReverseInPlace, whereas the other test methods produced an error in the way that the expected value, being the content of the array, was not the actual value upon the methods being called.
+The only test that was able to pass with the initial code was testReverseInPlace, whereas the other test methods produced an error in the way that the expected value, being the content of the array, was not the actual value upon the methods being called. (REVISION) In this way, each array element as it was being reversed in place (in the fribt half particularly) was being overwritten by the front half of the array, since the first half's array elements were being reassigned to the back half, leaving the first half to become lost. The symptoms particularly expect for the back half of the array to be what the front half was originally, as is the functionality of the reverseInPlace method. However, as they scanned through the array, they only saw the original elements there because the values that the front half held became the values of the back half before they could be temporarily kept somewhere such as a temporary variable, so a fix needed to be put into place to solve this.  
 Code before changes were made to fix it:  
 ```
 static void reverseInPlace(int[] arr) {
@@ -173,7 +171,7 @@ static void reverseInPlace(int[] arr) {
   }
 }
 ```  
-**What was done to fix it**: A temporary integer variable in the loop of the function was created to capture arr[i] before arr[i] was reassigned to the value of arr[arr.length - i - 1], since then the original arr[i] value will not be overwritten/lost.  Additionally, the loop was stopped halfway through the length of the array instead of iterating through the entire array, so that the array does not end up being the same as it was initially at the end.  
+**What was done to fix it**: (REVISION) The bug was that the values of the front end of the array, which were needed to rewrite the back end of the array, were lost as they were overwritten themselves by the back end of the array. In order to solve this, they needed to be temporarily captured and replace the value of the back half at the same time the front half was replaced. So, a temporary integer variable in the loop of the function was created to capture arr[i] before arr[i] was reassigned to the value of arr[arr.length - i - 1], since then the original arr[i] value will not be overwritten/lost. Additionally, the loop was stopped halfway through the length of the array instead of iterating through the entire array, so that the array does not end up being the same as it was initially at the end. If it went all the way through, then the array would just replace its old values with the exact same one as the loop finished iterating.
 
 ## Part 3: Learning Outcomes  
 For me, I was entirely new to the concept of servers, and fairly new to JUnit testing of code. In fact, the first that I had heard of it was the course that we were required to concurrently enroll in with CSE 15L, CSE 12, this quarter. In terms of other things that I learned, working with GitHub Desktop for the first time was really nice, as I did not know it would be so easy to commit and push changes to my code in repositories to the website. The servers were the most interesting part of these past two weeks, and I hope that I am able to work more with them in the future as they are loads of fun to play with in general.  
