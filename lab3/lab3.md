@@ -27,7 +27,8 @@ However, when the directory is specified after the string as berlitz1, the follo
 ![Image](./images/grep4.JPG)  
 Command Syntax: `grep -r "crawfish ./travel_guides/berlitz1` from within the `written_2` directory.  
 ### 3. Counting the number of files with a given search query  
-The grep command for counting the numbers of files is rather similar to that of the grep method, except that it uses the modifier `-c`to match a given query to the total sum of all results that can be found with such query. The formal syntax for this usage is:  
+
+(REVISION) The `-c` modifier is used to count the number of instances that a given search query pops up within a specified file or directory. It works similarly to the basic grep command, except that `-c` does not provide the user with an excerpt of where a certain word or phrase pops up, and only displays the number of times it pops up in the given file, making it more compact to display the number of mentions a certain word has in a file. The formal syntax for this usage is:  
 `grep -c <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>  `
 #### Example 1: Finding the number of mentions of "Ryan" within the non-fiction directory  
 In this example, we will be using the `-c` modifier required for returning the count of a specific string in a specific directory. As such, my name will be used as the string parameter passed to the terminal, and in this case we see that sadly, no file has mentioned me, meaning that I am in fact not nonfiction :(  
