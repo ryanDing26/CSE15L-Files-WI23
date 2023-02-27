@@ -39,7 +39,7 @@ As we have often been using the recursive modifier to look through many differen
 ![Image](./images/grep7.JPG)    
 Command Syntax: `grep -c -r "France" ./travel_guides/berlitz2/NewOrleans-History.txt` from within the `written_2` directory.  
 ### 4. Searching files that do NOT match a pattern  
-In all the other examples, we have tried to find the files and locations of everything that contained a specific string. However, what if we want every file that DID NOT contain a specific string? With this, we introduce the inverse modifier, `-v`, used to return everything that does not match a query given to the terminal. The syntax for this is as follows:  
+In all the other examples, we have tried to find the files and locations of everything that contained a specific string. However, what if we want every file that DID NOT contain a specific string? (REVISION) This would be useful if there is an abundant amount of one string, and you wanted to find everything WITHOUT said string in it. Additionally, it is a good way to see which files have contents devoid of a specific topic by filtering it out with a specified string. With this, we introduce the inverse modifier, `-v`, used to return everything that does not match a query given to the terminal. The syntax for this is as follows:  
 `grep -v <<Other Modifiers>> <<String query>> <<Specified File/Directory>>`  
 #### Example 1: Method 2.1, but with the inverse modifier  
 Going back to a previous example already used to show how -v works, we are going to search for all files that **DO NOT** contain the string "clothes" from within the written_2 directory:  
