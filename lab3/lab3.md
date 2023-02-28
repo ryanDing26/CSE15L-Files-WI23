@@ -21,7 +21,9 @@ The recursive modifier of grep, denoted as `-r`, allows for multiple files withi
 `grep -r <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>`  
 #### Example 1: Finding all the file names containing "clothes" in the entirety of written_2  
 In this example, we will introduce the usage of the `-l` modifier as well, which is used to display just the file names of the query given to the Git Bash terminal. With this, every single file that contains the string "clothes", not containing any excerpt, can efficiently be printed towards the screen! Note that since no directory or file name is specified, the local directory will be given as a default. However, in this case, since we are already searching under everything in written_2, it would be redundant to write it out:  
-![Image](./images/grepextres.JPG)  
+![Image](./images/greppt1.JPG)  
+![Image](./images/greppt2.JPG)    
+![Image](./images/greppt3.JPG)    
 Command Syntax: `grep -r -l "clothes"` from within the `written_2` directory.  
 #### Example 2: Finding the files (w/ excerpts) containing "crawfish" in berlitz1  
 Instead of looking just through written_2, we are able to specify the directory of recursion, with this time being within the berlitz1 directory. As can be seen, if we were to search in the entirety of written_2 as before, we would get two results:  
