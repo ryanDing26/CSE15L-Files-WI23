@@ -4,15 +4,15 @@ There are many ways for us to use grep, a command short for **Global Regular Exp
 ### (REVISION) General: The Usage of Grep
 Searching for a specific string is as easy as 1-2-3! Use the following syntax to search for a particular string within a specific file or even an entire directory:  
 `grep <<Modifiers>> <<String query>> <<Specified Directory>>`  
-(REVISION) In this lab report, we will be looking at various modifiers that make the `grep` command as special as it is!  
+In this lab report, we will be looking at various modifiers that make the `grep` command as special as it is!  
 ### (REVISION) 1. Searching up string without regard for capitalization  
 Sometimes, words are capitalized in txt files for some reason, whether it be because they are starting a sentence or because of a typo. Because of this, when we specify a string for grep to find, it has to factor in the capitalization of the string as well. However, with the `-i` option, we are able to disregard the capitalization of a given string entirely to more efficiently look up and captures its instances in a given file or group of files, making it teasier to get a word frequency count. The syntax for this is:  
 `grep -i <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>`.
 #### (REVISION) Example 1: Looking for the string "There" within a specific file, regardless of capitalization  
-(REVISION) For the sake of this tutorial, maybe we are wondering how many times a file uses the word `There` in order to analyze how frequently it is used in the file for some reason. Getting its specific count will be touched upon later in the lab report, but for now we wish to generally look up the word's occurrences in a given txt file. In using the regular grep command without modifiers, it would take two commands in order to get both uppercase and lowercase instances of the word, but by using the `-i` modifier, we are able to see the mentions of the word, regardless if it is capitalized or not.
+For the sake of this tutorial, maybe we are wondering how many times a file uses the word `There` in order to analyze how frequently it is used in the file for some reason. Getting its specific count will be touched upon later in the lab report, but for now we wish to generally look up the word's occurrences in a given txt file. In using the regular grep command without modifiers, it would take two commands in order to get both uppercase and lowercase instances of the word, but by using the `-i` modifier, we are able to see the mentions of the word, regardless if it is capitalized or not.
 ![Image](./images/grepex1.JPG)  
 Command Syntax: `grep -i "There" WhatToLakeDistrict.txt` from within the `berlitz2` directory.  
-#### Example 2: Looking for the string "Shogun" within a specific file, regardless of capitalization  
+#### (REVISION) Example 2: Looking for the string "Shogun" within a specific file, regardless of capitalization  
 We are now going to look within the HistoryJapan.txt file for the word "Shogun", to see how many times it is mentioned, as someone may have a fascination for feudal Japan and wants to know more about the shogun. Once more, we disregard capitalization in order to find the occurrences of the word alongisde short little blurbs of context towards its location:  
 ![Image](./images/grepex2.JPG)  
 Command Syntax: `grep -i "Shogun" HistoryJapan.txt` from within the `berlitz1` directory.  
@@ -30,7 +30,7 @@ However, when the directory is specified after the string as berlitz1, the follo
 ![Image](./images/grep4.JPG)  
 Command Syntax: `grep -r "crawfish ./travel_guides/berlitz1` from within the `written_2` directory.  
 ### 3. Counting the number of files with a given search query  
-(REVISION) The `-c` modifier is used to count the number of instances that a given search query pops up within a specified file or directory. It works similarly to the basic grep command, except that `-c` does not provide the user with an excerpt of where a certain word or phrase pops up, and only displays the number of times it pops up in the given file, making it more compact to display the number of mentions a certain word has. The formal syntax for this usage is:  
+(REVISION) The `-c` modifier is used to count the number of instances that a given search query pops up within a specified file or directory. It works similarly to the basic grep command in finding the location of strings, except that `-c` does not provide the user with an excerpt or context of where/when a certain word or phrase pops up. It is mainly useful for getting a numerical count for the appearances a string may have in a given file or directory in a compact manner! The formal syntax for this usage is:  
 `grep -c <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>  `
 #### Example 1: Finding the number of mentions of "Ryan" within the non-fiction directory  
 In this example, we will be using the `-c` modifier required for returning the count of a specific string in a specific directory. As such, my name will be used as the string parameter passed to the terminal, and in this case we see that sadly, no file has mentioned me, meaning that I am in fact not nonfiction :(  
