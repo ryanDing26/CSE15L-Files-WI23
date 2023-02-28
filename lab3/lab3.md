@@ -36,7 +36,9 @@ Command Syntax: `grep -r "crawfish ./travel_guides/berlitz1` from within the `wr
 `grep -c <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>  `
 #### Example 1: Finding the number of mentions of "Ryan" within the non-fiction directory  
 In this example, we will be using the `-c` modifier required for returning the count of a specific string in a specific directory. As such, my name will be used as the string parameter passed to the terminal, and in this case we see that sadly, no file has mentioned me, meaning that I am in fact not nonfiction :(  
-![Image](./images/grepex6.JPG)  
+![Image](./images/greppt4.JPG)  
+![Image](./images/greppt5.JPG)    
+![Image](./images/greppt6.JPG)    
 Command Syntax: `grep -c -r "Ryan" ./travel_guides/non-fiction` from within the `written_2` directory.  
 #### Example 2: Finding the number of mentions of "France" within a singular file  
 As we have often been using the recursive modifier to look through many different files, let us check within a singular file once more for the amount of times France is mentioned in the file NewOrleans-History.txt. As it should be mentioned a few times, given that New Orleans has its root in the French, we can see that it can be found six times throughout the .txt file:  
@@ -278,7 +280,9 @@ travel_guides/berlitz2/Vallarta-WhereToGo.txt
 Command Syntax: `grep -v -r -l "clothes"` from within the `written_2` directory.  
 #### Example 2: Method 3.1, but with the inverse modifier  
 In this example, we will be seeing how many lines can be counted in each file that do not contain the string "Ryan". As we have already found before, no file contains the "Ryan" string, so the count that will be outputted are just the number of lines in each file, making this specific command nothing more than a `wc` method with extra steps:  
-![Image](./images/grep8.JPG)  
+![Image](./images/greppt7.JPG)  
+![Image](./images/greppt8.JPG)  
+![Image](./images/greppt9.JPG)  
 Command Syntax: `grep -v -c -r "Ryan" ./non-fiction` from within the `written_2` directory.  
 ##### Sources Used: [Different grep commands](https://phoenixnap.com/kb/grep-command-linux-unix-examples#ftoc-heading-3) | [Practical Grep Commands](https://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/) | [CSE 15L WI23 PAGE](https://ucsd-cse15l-w23.github.io/)  
 # Happy Coding!
