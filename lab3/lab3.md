@@ -1,24 +1,27 @@
 # Lab Report 3 | Ryan Ding  
 ## Different Ways to Use Grep  
 There are many ways for us to use grep, a command short for **Global Regular Expression Print**, from the ways with which Professor Politz taught us in lecture to other ways that can be found online. In this lab report, I will go into the different commands that grep has to offer that may be of essential use in a future Skill Demostration, lab assignment, or just casual use! All examples will be going through the written_2 folder provided in the [Skill Demonstration 1 Data Repository](https://github.com/ucsd-cse15l-w23/skill-demo1-data). Keep in mind that in these examples, should nothing be printed to the command line, there are either no results to be found using the command or the command was not used in a proper way.  
-### 1. Searching for a specific string within a file
-Searching for a specific string within a file is as easy as 1-2-3! Use the following syntax to search for a particular string within a specific file or even an entire directory:  
+### (REVISION) General: The Usage of Grep
+Searching for a specific string is as easy as 1-2-3! Use the following syntax to search for a particular string within a specific file or even an entire directory:  
 `grep <<Modifiers>> <<String query>> <<Specified Directory>>`  
-While modifiers are also an essential part of scraping just the information needed for a specific task, they will only be touched upon briefly in different examples, allowing us to pick and choose what piece of information is printed to the command line. However, in these next two examples, they will not be used.  
-#### Example 1: Looking for the string "Cuba" within a specific file  
-In running the command `grep "Cuba" <<file name>>`, we are able to check as to whether or not the chosen file contains the string "Cuba." Without any modifiers, the terminal will print out a short excerpt of the file with the specified string. For instance, when we check for the string "Cuba" within the Vallarta-WhatToDo.txt file, we can seen where it is mentioned:  
-![Image](./images/grep1.JPG)  
-Command Syntax: `grep "Cuba" Vallarta-WhatToDo.txt` from within the `berlitz2` directory.  
-#### Example 2: Looking for the string "Rainy" within a specific file  
-Again, this example is similar to the one above, except that it searches for the string "Rainy" to see if it is located within the specific file WhatToLakeDistrict.txt. While these methods do seem inefficient should a large number of files need to be checked, there will be different and better ways to cover a large amount of files later on in this report, such as through recursive searching and the usage of different parameters.
-![Image](./images/grep2.JPG)  
-Command Syntax: `grep "Rainy" WhatToLakeDistrict.txt` from within the `berlitz1` directory.  
+(REVISION) In this lab report, we will be looking at various modifiers that make the `grep` command as special as it is!  
+### (REVISION) 1. Searching up string without regard for capitalization  
+Sometimes, words are capitalized in txt files for some reason, whether it be because they are starting a sentence or because of a typo. Because of this, when we specify a string for grep to find, it has to factor in the capitalization of the string as well. However, with the `-i` option, we are able to disregard the capitalization of a given string entirely to more efficiently look up and captures its instances in a given file or group of files, making it teasier to get a word frequency count. The syntax for this is:  
+`grep -i <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>`.
+#### (REVISION) Example 1: Looking for the string "There" within a specific file, regardless of capitalization  
+(REVISION) For the sake of this tutorial, maybe we are wondering how many times a file uses the word `There` in order to analyze how frequently it is used in the file for some reason. Getting its specific count will be touched upon later in the lab report, but for now we wish to generally look up the word's occurrences in a given txt file. In using the regular grep command without modifiers, it would take two commands in order to get both uppercase and lowercase instances of the word, but by using the `-i` modifier, we are able to see the mentions of the word, regardless if it is capitalized or not.
+![Image](./images/grepex1.JPG)  
+Command Syntax: `grep -i "There" WhatToLakeDistrict.txt` from within the `berlitz2` directory.  
+#### Example 2: Looking for the string "Shogun" within a specific file, regardless of capitalization  
+We are now going to look within the HistoryJapan.txt file for the word "Shogun", to see how many times it is mentioned, as someone may have a fascination for feudal Japan and wants to know more about the shogun. Once more, we disregard capitalization in order to find the occurrences of the word alongisde short little blurbs of context towards its location:  
+![Image](./images/grepex2.JPG)  
+Command Syntax: `grep -i "Shogun" HistoryJapan.txt` from within the `berlitz1` directory.  
 ### 2. Recursively searching through multiple directories  
 The recursive modifier of grep, denoted as `-r`, allows for multiple files within the local and even deeper directories to be searched to return a specific query. This was an essential modifier to use for our past skill demonstration, as written_2 possessed layers of varying depths of directory upon directory that needed to be scanned to complete specific tasks. The modifier searches everything within the local directory and everything below it. The syntax is as such:  
 `grep -r <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>`  
 #### Example 1: Finding all the file names containing "clothes" in the entirety of written_2  
 In this example, we will introduce the usage of the `-l` modifier as well, which is used to display just the file names of the query given to the Git Bash terminal. With this, every single file that contains the string "clothes", not containing any excerpt, can efficiently be printed towards the screen! Note that since no directory or file name is specified, the local directory will be given as a default. However, in this case, since we are already searching under everything in written_2, it would be redundant to write it out:  
-![Image](./images/grep3.JPG)  
+![Image](./images/grepex3.JPG)  
 Command Syntax: `grep -r -l "clothes"` from within the `written_2` directory.  
 #### Example 2: Finding the files (w/ excerpts) containing "crawfish" in berlitz1  
 Instead of looking just through written_2, we are able to specify the directory of recursion, with this time being within the berlitz1 directory. As can be seen, if we were to search in the entirety of written_2 as before, we would get two results:  
@@ -27,12 +30,11 @@ However, when the directory is specified after the string as berlitz1, the follo
 ![Image](./images/grep4.JPG)  
 Command Syntax: `grep -r "crawfish ./travel_guides/berlitz1` from within the `written_2` directory.  
 ### 3. Counting the number of files with a given search query  
-
-(REVISION) The `-c` modifier is used to count the number of instances that a given search query pops up within a specified file or directory. It works similarly to the basic grep command, except that `-c` does not provide the user with an excerpt of where a certain word or phrase pops up, and only displays the number of times it pops up in the given file, making it more compact to display the number of mentions a certain word has in a file. The formal syntax for this usage is:  
+(REVISION) The `-c` modifier is used to count the number of instances that a given search query pops up within a specified file or directory. It works similarly to the basic grep command, except that `-c` does not provide the user with an excerpt of where a certain word or phrase pops up, and only displays the number of times it pops up in the given file, making it more compact to display the number of mentions a certain word has. The formal syntax for this usage is:  
 `grep -c <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>  `
 #### Example 1: Finding the number of mentions of "Ryan" within the non-fiction directory  
 In this example, we will be using the `-c` modifier required for returning the count of a specific string in a specific directory. As such, my name will be used as the string parameter passed to the terminal, and in this case we see that sadly, no file has mentioned me, meaning that I am in fact not nonfiction :(  
-![Image](./images/grep6.JPG)  
+![Image](./images/grepex6.JPG)  
 Command Syntax: `grep -c -r "Ryan" ./travel_guides/non-fiction` from within the `written_2` directory.  
 #### Example 2: Finding the number of mentions of "France" within a singular file  
 As we have often been using the recursive modifier to look through many different files, let us check within a singular file once more for the amount of times France is mentioned in the file NewOrleans-History.txt. As it should be mentioned a few times, given that New Orleans has its root in the French, we can see that it can be found six times throughout the .txt file:  
