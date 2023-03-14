@@ -1,29 +1,30 @@
 # CSE 15L Lab Report 5 | Ryan Ding
 ## Different ways to use `find` in bash
-The find command, as its name suggests, allows for users to look for and potentially edit files via the Git Bash command line. Its syntax can normally be seen as follows:  
+The find command, as its name suggests, allows for users to look for files or directories via the Git Bash command line. Its syntax can normally be seen as follows:  
 `find <<Working Directory>>`  
-Note that when no directory is specified, the current working directory is used as a default. At its most basic level, it will print out the relative path of every file and directory under the working directory. However, this is not representative of how strong it actually is, and the options that it has makes it useful for a variety of purposes. In this lab report, we will once more be giong over the modifiers of a command within bash, similar to that of [Lab Report 3](https://github.com/ryanDing26/cse15l-lab-reports/tree/main/lab3).  
+*Note that when no directory is specified, the current working directory is used as a default.*  
+At its most basic level, it will print out the relative path of every file and directory under the working directory. However, this is not representative of how strong it actually is, and the options that it has makes it useful for a variety of purposes. In this lab report, we will once more be going over the modifiers of a command within bash, similar to that of [Lab Report 3](https://github.com/ryanDing26/cse15l-lab-reports/tree/main/lab3).  
 
 ### 1. Finding the name of a specific file within a directory  
 With the operator `-name`, individuals can specify for the name of a specific file or directory to be found. This is useful when you know that a file exists, but misplaced it inside a directory, and it makes it so much easier to change into its working directory or just to know its general location. The syntax is rather simple:   
 `find <<Working Directory>> -name <<Name of file/directory>>`  
 
 #### Example 1: Finding Vallarta-History.txt from written_2  
-Let's say that I made and wrote a file on the history of Vallarta, but I had made so many directories that I lost it within the piles of txt files that I put into my directory. Using the find command, I am able to pinpoint its location and gain my time spent on the file back by finding it:  
+Let's say that I made and wrote a file on the history of Vallarta, but I had made so many directories that I lost it somewhere. Using the find command, I am able to pinpoint its location and find it to once more perform whatever devious activities I want on it:  
 ![Image](./images/5.1.1.JPG)    
 Command Syntax: `find -name Vallarta-History.txt`from within the `written_2` directory  
 
 #### Example 2: Finding all ch1.txt files from non-fiction  
-Additionally, let's say that I have multiple textbooks on my computer, labelled within different chapters. What if I wanted to see how many of them had a ch1.txt file? By using the `-name` option, I am able to clearly see just how many ch1.txt files that I have within my directory:  
+Alternatively, let's say that I have multiple textbooks on my computer, separated in txt files by the chapter. What if I wanted to see how many ch1.txt files exist? By using the `-name` option, I am able to clearly see just how many ch1.txt files that I have, as well as their relative paths:  
 ![Image](./images/5.1.2.JPG)    
 Command Syntax: `find written_2/non-fiction -name ch1.txt` from within the `written_2` directory  
 
 ### 2. Finding files that are entirely empty  
-Using the `-empty` operator, we are able to find and print the relative path of every empty file or directory. In practicality, this serves to allow us to clean out the clutter that may build up as we play around with the command line and Git Bash more and more, since we can identify which files are empty and thus delete them as they serve no purpose. The syntax for finding empty files is:  
+Using the `-empty` operator, we are able to find and print the relative path of every empty file or directory. In practicality, this is useful to clean out the clutter that may build up as we play around with the command line and Git Bash, since we can identify and delete files and directories that are empty within our system. The syntax for finding empty files is:  
 `find <<Working Directory>> -empty`
 
 #### Example 1: Finding an empty directory I created within written_2
-After creating an empty directory in written_2 using the simple `mkdir test` command (which will not be talked out in this report; just know that I made a new, empty directory), we are able to find its existance as an empty directory and then either add files or other directories inside of it for usage or to delete it entirely:  
+After creating an empty directory in written_2 using the simple `mkdir test` command (which will not be talked out in this report; just know that I made a new, empty directory), we are able to find its existance as an empty directory and then determine its fate of deletion or usage (Spoiler alert: I do neither, it just sits there):  
 
 ![Image](./images/5.2.1.JPG)    
 Command Syntax: `find -empty` from within the `written_2` directory
@@ -37,15 +38,15 @@ Command Syntax: `find non-fiction/OUP -empty` from within the `written_2` direct
 ### 3. Finding files that are newer than one specified
 Each file has lots of metadata, including the date it was modified and created. Using the `-new` option, find is able to find all file and directories newer than the one specified, with this syntax:  
 `find <<Working Directory>> -newer <<File of comparison>>`  
-This is exceptionally useful for cases where the date of a file is important, such as if you recently downloaded malware on accident and need to see which files are new on your device.
+This is exceptionally useful for cases where the date of a file is important, such as if you recently downloaded malware on accident and need to see which files are new on your device after a specific file was downloaded.
 
 #### Example 1: Finding files newer than the Canada-WhereToGo.txt file
-Suppose I made all the txt files by hand, and that I stopped working one night while another person added more and more txt files in the morning. In order to discern which ones were made newly after I stopped working, which was right after I finished the Canada-WhereToGo.txt file, I can use the `-newer` option to see the names of the files created after my Canada txt file:
+Suppose I made all the txt files by hand, and that I stopped working one night while another person added more and more txt files in the morning. In order to discern which ones were made newly after I stopped working, which was right after I finished the Canada-WhereToGo.txt file, I can use the `-newer` option to see the names of the files created after my Canada file:
 ![Image](./images/5.3.1.JPG)  
 Command Syntax: `find -newer travel_guides/berlitz2/Canada-WhereToGo.txt` from within the `written_2` directory  
 
 #### Example 2: Finding files newer than the lab5.txt file I created in 2.2
-What if I made a new file, and was overly cautious on if it may have produced anything else? Using the `-newer` option once more, I can check which files or directories have been modified after the creation of the lab5.txt file I had previously made in Example 2.2. Since I created nor modified nothing else by the time I created lab5.txt, nothing should appear, which is correct: 
+What if I made a new file, and was overly paranoid on if it may have produced anything else? Using the `-newer` option once more, I can check which files or directories have been modified after the creation of the lab5.txt file I had previously made in Example 2.2. Since I did not create or modify anthing else after I created lab5.txt, nothing should appear, which is correct: 
 ![Image](./images/5.3.2.JPG)  
 Command Syntax: `find -newer non-fiction/OUP/lab5.txt` from within the `written_2` directory
 
