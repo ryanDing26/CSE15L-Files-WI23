@@ -67,4 +67,4 @@ Command Syntax: `find -user cs15lwi23aya`  from within the parent directory of `
 *Note that the `2>./cs15lwi23alr/waste.txt` was the way for the command line to redirect all the "Permission Denied" errors that went into the output into a .txt file for readability in this report.*    
 
 ###### Sources Used: [Libre Texts](https://eng.libretexts.org/Bookshelves/Computer_Science/Operating_Systems/Linux_-_The_Penguin_Marches_On_(McClanahan)/05%3A_File_and_Directory_Management/2.05%3A_Searching_for_Files_on_Linux/2.05.01%3A_Searching_for_Files_on_Linux_-_find_Command#:~:text=The%20find%20Command,-The%20find%20command&text=It%20can%20be%20used%20to,on%20files%20or%20folders%20found.)  
-# Happy Coding! Please give me full points :O
+# Happy Coding!
