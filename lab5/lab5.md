@@ -1,4 +1,4 @@
-# CSE 15L Lab Report 5 | Ryan Ding
+# Lab Report 5 | Ryan Ding
 ## Different ways to use `find` in bash
 The find command, as its name suggests, allows for users to look for files or directories via the Git Bash command line. Its syntax can normally be seen as follows:  
 `find <<Working Directory>>`  
