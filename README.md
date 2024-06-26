@@ -1,0 +1,2 @@
+# CSE 15L Labs WI23
+These are my lab reports that I wrote whilst I took CSE 15L: Software Tools and Techniques Laboratory with Professor Joseph Politz in Winter 2023 at UC San Diego! These labs are in no way intended to be used for replication or violation of academic integrity purposes, and I do not condone using my previous writeup information to solve your own issues as it may not be accurate to the recent course offering of 15L nor would it help for you to achieve your own learning outcomes.
