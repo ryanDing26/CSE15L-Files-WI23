@@ -1,71 +1,288 @@
-# Lab Report 5 | Ryan Ding
-## Different ways to use `find` in bash
-The find command, as its name suggests, allows for users to look for files or directories via the Git Bash command line. Its syntax can normally be seen as follows:  
-`find <<Working Directory>>`  
-*Note that when no directory is specified, the current working directory is used as a default.*  
-At its most basic level, it will print out the relative path of every file and directory under the working directory. However, this is not representative of how strong it actually is, and the options that it has makes it useful for a variety of purposes. In this lab report, we will once more be going over the modifiers of a command within bash, similar to that of [Lab Report 3](https://github.com/ryanDing26/cse15l-lab-reports/tree/main/lab3).  
-
-### 1. Finding the name of a specific file within a directory  
-With the operator `-name`, individuals can specify for the name of a specific file or directory to be found. This is useful when you know that a file exists, but misplaced it inside a directory, and it makes it so much easier to change into its working directory or just to know its general location. The syntax is rather simple:   
-`find <<Working Directory>> -name <<Name of file/directory>>`  
-
-#### Example 1: Finding Vallarta-History.txt from written_2  
-Let's say that I made and wrote a file on the history of Vallarta, but I had made so many directories that I lost it somewhere. Using the find command, I am able to pinpoint its location and find it to once more perform whatever devious activities I want on it:  
-![Image](./images/5.1.1.JPG)    
-Command Syntax: `find -name Vallarta-History.txt`from within the `written_2` directory  
-
-#### Example 2: Finding all ch1.txt files from non-fiction  
-Alternatively, let's say that I have multiple textbooks on my computer, separated in txt files by the chapter. What if I wanted to see how many ch1.txt files exist? By using the `-name` option, I am able to clearly see just how many ch1.txt files that I have, as well as their relative paths:  
-![Image](./images/5.1.2.JPG)    
-Command Syntax: `find written_2/non-fiction -name ch1.txt` from within the `written_2` directory  
-
-### 2. Finding files that are entirely empty  
-Using the `-empty` operator, we are able to find and print the relative path of every empty file or directory. In practicality, this is useful to clean out the clutter that may build up as we play around with the command line and Git Bash, since we can identify and delete files and directories that are empty within our system. The syntax for finding empty files is:  
-`find <<Working Directory>> -empty`
-
-#### Example 1: Finding an empty directory I created within written_2
-After creating an empty directory in written_2 using the simple `mkdir test` command (which will not be talked out in this report; just know that I made a new, empty directory), we are able to find its existance as an empty directory and then determine its fate of deletion or usage (Spoiler alert: I do neither, it just sits there):  
-
-![Image](./images/5.2.1.JPG)    
-Command Syntax: `find -empty` from within the `written_2` directory
-
-#### Example 2: Finding an empty file I created within OUP
-From the written_2 directory, I went ahead and created an empty txt file called lab5.txt using `touch non-fiction/OUP/lab5.txt` from the `written_2` directory. After this, I used the `-empty` option to see if it would be able to detect the empty txt file, which it did successfully:  
-![Image](./images/5.2.2.JPG)    
-Command Syntax: `find non-fiction/OUP -empty` from within the `written_2` directory  
-*Note that I specified the directory in this example so as to avoid the output of the paths of other empty files I may have created.*
-
-### 3. Finding files that are newer than one specified
-Each file has lots of metadata, including the date it was modified and created. Using the `-new` option, find is able to find all file and directories newer than the one specified, with this syntax:  
-`find <<Working Directory>> -newer <<File of comparison>>`  
-This is exceptionally useful for cases where the date of a file is important, such as if you recently downloaded malware on accident and need to see which files are new on your device after a specific file was downloaded.
-
-#### Example 1: Finding files newer than the Canada-WhereToGo.txt file
-Suppose I made all the txt files by hand, and that I stopped working one night while another person added more and more txt files in the morning. In order to discern which ones were made newly after I stopped working, which was right after I finished the Canada-WhereToGo.txt file, I can use the `-newer` option to see the names of the files created after my Canada file:
-![Image](./images/5.3.1.JPG)  
-Command Syntax: `find -newer travel_guides/berlitz2/Canada-WhereToGo.txt` from within the `written_2` directory  
-
-#### Example 2: Finding files newer than the lab5.txt file I created in 2.2
-What if I made a new file, and was overly paranoid on if it may have produced anything else? Using the `-newer` option once more, I can check which files or directories have been modified after the creation of the lab5.txt file I had previously made in Example 2.2. Since I did not create or modify anthing else after I created lab5.txt, nothing should appear, which is correct: 
-![Image](./images/5.3.2.JPG)  
-Command Syntax: `find -newer non-fiction/OUP/lab5.txt` from within the `written_2` directory
-
-### 4. Finding files owned by a specific user  
-What if you were not the only user that made files within a directory? With the `-user` command, you can specify to see the relative paths towards files owned by a specific user, useful for indicating who added each specific file within a directory. The syntax for this command is as follows:  
-`find <<Working Directory>> -user <<Username of creator>>`  
-This can serve useful to separate the files and directories you may have added towards a shared directory from those that others have added so that you can identify which files you made and potentially should be working within.  
-
-#### Example 1: Finding files I (cs15lwi23alr) created within Berk  
-In this example, we are going to find out which files that I created within Berk. Given that this is my ieng6 account, and that I cloned the written_2 directory into it along with its subdirectories, I actually own every single file within Berk, and the output is reflective of that:  
-![Image](./images/5.4.1.JPG)  
-Command Syntax: `find -user cs15lwialr` from within the `written_2/non-fiction/OUP/Berk` directory  
-
-#### Example 2 (Outside written_2): Seeing if some username exists within ieng6  
-This is the only sample that will go outside the scope of the written_2 directory because of the confines of this option. After SSHing into my ieng6 account and performing `cd ..`, it places me within the parent directory of the file named `cs15lwi23`, which harbors all users within the CSE 15L course. By performing the find command with the `-user` option, it allows me to check for a directory (in this case identifical to someone's username) that may exist, proving their existance within CSE 15L (Note that this was not done with intention to harm others):  
-
-![Image](./images/5.4.2.JPG)  
-Command Syntax: `find -user cs15lwi23aya`  from within the parent directory of `cs15lwi23alr`
-*Note that the `2>./cs15lwi23alr/waste.txt` was the way for the command line to redirect all the "Permission Denied" errors that went into the output into a .txt file for readability in this report.*    
-
-###### Sources Used: [Libre Texts](https://eng.libretexts.org/Bookshelves/Computer_Science/Operating_Systems/Linux_-_The_Penguin_Marches_On_(McClanahan)/05%3A_File_and_Directory_Management/2.05%3A_Searching_for_Files_on_Linux/2.05.01%3A_Searching_for_Files_on_Linux_-_find_Command#:~:text=The%20find%20Command,-The%20find%20command&text=It%20can%20be%20used%20to,on%20files%20or%20folders%20found.)  
+# Lab Report 3 | Ryan Ding  
+## Different Ways to Use Grep  
+There are many ways for us to use grep, a command short for **Global Regular Expression Print**, from the ways with which Professor Politz taught us in lecture to other ways that can be found online. In this lab report, I will go into the different commands that grep has to offer that may be of essential use in a future Skill Demostration, lab assignment, or just casual use! All examples will be going through the written_2 folder provided in the [Skill Demonstration 1 Data Repository](https://github.com/ucsd-cse15l-w23/skill-demo1-data). Keep in mind that in these examples, should nothing be printed to the command line, there are either no results to be found using the command or the command was not used in a proper way.  
+### (REVISION) General: The Usage of Grep
+Searching for a specific string is as easy as 1-2-3! Use the following syntax to search for a particular string within a specific file or even an entire directory:  
+`grep <<Modifiers>> <<String query>> <<Specified Directory>>`  
+In this lab report, we will be looking at various modifiers that make the `grep` command as special as it is!  
+### (REVISION) 1. Searching up string without regard for capitalization  
+Sometimes, words are capitalized in txt files for some reason, whether it be because they are starting a sentence or because of a typo. Because of this, when we specify a string for grep to find, it has to factor in the capitalization of the string as well. However, with the `-i` option, we are able to disregard the capitalization of a given string entirely to more efficiently look up and captures its instances in a given file or group of files, making it teasier to get a word frequency count. The syntax for this is:  
+`grep -i <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>`.
+#### (REVISION) Example 1: Looking for the string "There" within a specific file, regardless of capitalization  
+For the sake of this tutorial, maybe we are wondering how many times a file uses the word `There` in order to analyze how frequently it is used in the file for some reason. Getting its specific count will be touched upon later in the lab report, but for now we wish to generally look up the word's occurrences in a given txt file. In using the regular grep command without modifiers, it would take two commands in order to get both uppercase and lowercase instances of the word, but by using the `-i` modifier, we are able to see the mentions of the word, regardless if it is capitalized or not.
+![Image](./images/grepex1.JPG)  
+Command Syntax: `grep -i "There" WhatToLakeDistrict.txt` from within the `berlitz2` directory.  
+#### (REVISION) Example 2: Looking for the string "Shogun" within a specific file, regardless of capitalization  
+We are now going to look within the HistoryJapan.txt file for the word "Shogun", to see how many times it is mentioned, as someone may have a fascination for feudal Japan and wants to know more about the shogun. Once more, we disregard capitalization in order to find the occurrences of the word alongisde short little blurbs of context towards its location:  
+![Image](./images/grepex2.JPG)  
+Command Syntax: `grep -i "Shogun" HistoryJapan.txt` from within the `berlitz1` directory.  
+### 2. Recursively searching through multiple directories  
+The recursive modifier of grep, denoted as `-r`, allows for multiple files within the local and even deeper directories to be searched to return a specific query. This was an essential modifier to use for our past skill demonstration, as written_2 possessed layers of varying depths of directory upon directory that needed to be scanned to complete specific tasks. The modifier searches everything within the local directory and everything below it. The syntax is as such:  
+`grep -r <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>`  
+#### Example 1: Finding all the file names containing "clothes" in the entirety of written_2  
+In this example, we will introduce the usage of the `-l` modifier as well, which is used to display just the file names of the query given to the Git Bash terminal. With this, every single file that contains the string "clothes", not containing any excerpt, can efficiently be printed towards the screen! Note that since no directory or file name is specified, the local directory will be given as a default. However, in this case, since we are already searching under everything in written_2, it would be redundant to write it out:  
+![Image](./images/greppt1.JPG)  
+![Image](./images/greppt2.JPG)    
+![Image](./images/greppt3.JPG)    
+Command Syntax: `grep -r -l "clothes"` from within the `written_2` directory.  
+#### Example 2: Finding the files (w/ excerpts) containing "crawfish" in berlitz1  
+Instead of looking just through written_2, we are able to specify the directory of recursion, with this time being within the berlitz1 directory. As can be seen, if we were to search in the entirety of written_2 as before, we would get two results:  
+![Image](./images/grep5.JPG)  
+However, when the directory is specified after the string as berlitz1, the following shows instead:  
+![Image](./images/grep4.JPG)  
+Command Syntax: `grep -r "crawfish ./travel_guides/berlitz1` from within the `written_2` directory.  
+### 3. Counting the number of files with a given search query  
+(REVISION) The `-c` modifier is used to count the number of instances that a given search query pops up within a specified file or directory. It works similarly to the basic grep command in finding the location of strings, except that `-c` does not provide the user with an excerpt or context of where/when a certain word or phrase pops up. It is mainly useful for getting a numerical count for the appearances a string may have in a given file or directory in a compact manner! The formal syntax for this usage is:  
+`grep -c <<Other Modifiers>> <<Specified String>> <<Given File/Directory>>  `
+#### Example 1: Finding the number of mentions of "Ryan" within the non-fiction directory  
+In this example, we will be using the `-c` modifier required for returning the count of a specific string in a specific directory. As such, my name will be used as the string parameter passed to the terminal, and in this case we see that sadly, no file has mentioned me, meaning that I am in fact not nonfiction :(  
+![Image](./images/greppt4.JPG)  
+![Image](./images/greppt5.JPG)    
+![Image](./images/greppt6.JPG)    
+Command Syntax: `grep -c -r "Ryan" ./travel_guides/non-fiction` from within the `written_2` directory.  
+#### Example 2: Finding the number of mentions of "France" within a singular file  
+As we have often been using the recursive modifier to look through many different files, let us check within a singular file once more for the amount of times France is mentioned in the file NewOrleans-History.txt. As it should be mentioned a few times, given that New Orleans has its root in the French, we can see that it can be found six times throughout the .txt file:  
+![Image](./images/grep7.JPG)    
+Command Syntax: `grep -c -r "France" ./travel_guides/berlitz2/NewOrleans-History.txt` from within the `written_2` directory.  
+### 4. Searching files that do NOT match a pattern  
+In all the other examples, we have tried to find the files and locations of everything that contained a specific string. However, what if we want every file that DID NOT contain a specific string? (REVISION) This would be useful if there is an abundant amount of one string, and you wanted to find everything WITHOUT said string in it. Additionally, it is a good way to see which files have contents devoid of a specific topic by filtering it out with a specified string. With this, we introduce the inverse modifier, `-v`, used to return everything that does not match a query given to the terminal. The syntax for this is as follows:  
+`grep -v <<Other Modifiers>> <<String query>> <<Specified File/Directory>>`  
+#### Example 1: Method 2.1, but with the inverse modifier  
+Going back to a previous example already used to show how -v works, we are going to search for all files that **DO NOT** contain the string "clothes" from within the written_2 directory:  
+ ```
+// This was printed as it was too large of an output to fit into one screenshot  
+[cs15lwi23alr@ieng6-201]:written_2:443$ grep -v -r -l "clothes"
+non-fiction/OUP/Abernathy/ch1.txt
+non-fiction/OUP/Abernathy/ch14.txt
+non-fiction/OUP/Abernathy/ch15.txt
+non-fiction/OUP/Abernathy/ch2.txt
+non-fiction/OUP/Abernathy/ch3.txt
+non-fiction/OUP/Abernathy/ch6.txt
+non-fiction/OUP/Abernathy/ch7.txt
+non-fiction/OUP/Abernathy/ch8.txt
+non-fiction/OUP/Abernathy/ch9.txt
+non-fiction/OUP/Berk/CH4.txt
+non-fiction/OUP/Berk/ch1.txt
+non-fiction/OUP/Berk/ch2.txt
+non-fiction/OUP/Berk/ch7.txt
+non-fiction/OUP/Castro/chA.txt
+non-fiction/OUP/Castro/chB.txt
+non-fiction/OUP/Castro/chC.txt
+non-fiction/OUP/Castro/chL.txt
+non-fiction/OUP/Castro/chM.txt
+non-fiction/OUP/Castro/chN.txt
+non-fiction/OUP/Castro/chO.txt
+non-fiction/OUP/Castro/chP.txt
+non-fiction/OUP/Castro/chQ.txt
+non-fiction/OUP/Castro/chR.txt
+non-fiction/OUP/Castro/chV.txt
+non-fiction/OUP/Castro/chW.txt
+non-fiction/OUP/Castro/chY.txt
+non-fiction/OUP/Castro/chZ.txt
+non-fiction/OUP/Fletcher/ch1.txt
+non-fiction/OUP/Fletcher/ch10.txt
+non-fiction/OUP/Fletcher/ch2.txt
+non-fiction/OUP/Fletcher/ch5.txt
+non-fiction/OUP/Fletcher/ch6.txt
+non-fiction/OUP/Fletcher/ch9.txt
+non-fiction/OUP/Kauffman/ch1.txt
+non-fiction/OUP/Kauffman/ch10.txt
+non-fiction/OUP/Kauffman/ch3.txt
+non-fiction/OUP/Kauffman/ch4.txt
+non-fiction/OUP/Kauffman/ch5.txt
+non-fiction/OUP/Kauffman/ch6.txt
+non-fiction/OUP/Kauffman/ch7.txt
+non-fiction/OUP/Kauffman/ch8.txt
+non-fiction/OUP/Kauffman/ch9.txt
+non-fiction/OUP/Rybczynski/ch1.txt
+non-fiction/OUP/Rybczynski/ch2.txt
+non-fiction/OUP/Rybczynski/ch3.txt
+travel_guides/berlitz1/HandRHawaii.txt
+travel_guides/berlitz1/HandRHongKong.txt
+travel_guides/berlitz1/HandRIbiza.txt
+travel_guides/berlitz1/HandRIsrael.txt
+travel_guides/berlitz1/HandRIstanbul.txt
+travel_guides/berlitz1/HandRJamaica.txt
+travel_guides/berlitz1/HandRJerusalem.txt
+travel_guides/berlitz1/HandRLakeDistrict.txt
+travel_guides/berlitz1/HandRLasVegas.txt
+travel_guides/berlitz1/HandRLisbon.txt
+travel_guides/berlitz1/HandRLosAngeles.txt
+travel_guides/berlitz1/HandRMadeira.txt
+travel_guides/berlitz1/HandRMadrid.txt
+travel_guides/berlitz1/HandRMallorca.txt
+travel_guides/berlitz1/HistoryDublin.txt
+travel_guides/berlitz1/HistoryEdinburgh.txt
+travel_guides/berlitz1/HistoryEgypt.txt
+travel_guides/berlitz1/HistoryFWI.txt
+travel_guides/berlitz1/HistoryFrance.txt
+travel_guides/berlitz1/HistoryGreek.txt
+travel_guides/berlitz1/HistoryHawaii.txt
+travel_guides/berlitz1/HistoryHongKong.txt
+travel_guides/berlitz1/HistoryIbiza.txt
+travel_guides/berlitz1/HistoryIndia.txt
+travel_guides/berlitz1/HistoryIsrael.txt
+travel_guides/berlitz1/HistoryIstanbul.txt
+travel_guides/berlitz1/HistoryItaly.txt
+travel_guides/berlitz1/HistoryJamaica.txt
+travel_guides/berlitz1/HistoryJapan.txt
+travel_guides/berlitz1/HistoryJerusalem.txt
+travel_guides/berlitz1/HistoryLakeDistrict.txt
+travel_guides/berlitz1/HistoryLasVegas.txt
+travel_guides/berlitz1/HistoryMadeira.txt
+travel_guides/berlitz1/HistoryMadrid.txt
+travel_guides/berlitz1/HistoryMalaysia.txt
+travel_guides/berlitz1/HistoryMallorca.txt
+travel_guides/berlitz1/IntroDublin.txt
+travel_guides/berlitz1/IntroEdinburgh.txt
+travel_guides/berlitz1/IntroEgypt.txt
+travel_guides/berlitz1/IntroFWI.txt
+travel_guides/berlitz1/IntroFrance.txt
+travel_guides/berlitz1/IntroGreek.txt
+travel_guides/berlitz1/IntroHongKong.txt
+travel_guides/berlitz1/IntroIbiza.txt
+travel_guides/berlitz1/IntroIndia.txt
+travel_guides/berlitz1/IntroIsrael.txt
+travel_guides/berlitz1/IntroIstanbul.txt
+travel_guides/berlitz1/IntroItaly.txt
+travel_guides/berlitz1/IntroJamaica.txt
+travel_guides/berlitz1/IntroJapan.txt
+travel_guides/berlitz1/IntroJerusalem.txt
+travel_guides/berlitz1/IntroLakeDistrict.txt
+travel_guides/berlitz1/IntroLasVegas.txt
+travel_guides/berlitz1/IntroLosAngeles.txt
+travel_guides/berlitz1/IntroMadeira.txt
+travel_guides/berlitz1/IntroMadrid.txt
+travel_guides/berlitz1/IntroMalaysia.txt
+travel_guides/berlitz1/IntroMallorca.txt
+travel_guides/berlitz1/JungleMalaysia.txt
+travel_guides/berlitz1/WhatToDublin.txt
+travel_guides/berlitz1/WhatToEdinburgh.txt
+travel_guides/berlitz1/WhatToEgypt.txt
+travel_guides/berlitz1/WhatToFWI.txt
+travel_guides/berlitz1/WhatToFrance.txt
+travel_guides/berlitz1/WhatToGreek.txt
+travel_guides/berlitz1/WhatToHawaii.txt
+travel_guides/berlitz1/WhatToHongKong.txt
+travel_guides/berlitz1/WhatToIbiza.txt
+travel_guides/berlitz1/WhatToIndia.txt
+travel_guides/berlitz1/WhatToIsrael.txt
+travel_guides/berlitz1/WhatToIstanbul.txt
+travel_guides/berlitz1/WhatToItaly.txt
+travel_guides/berlitz1/WhatToJamaica.txt
+travel_guides/berlitz1/WhatToJapan.txt
+travel_guides/berlitz1/WhatToLakeDistrict.txt
+travel_guides/berlitz1/WhatToLasVegas.txt
+travel_guides/berlitz1/WhatToLosAngeles.txt
+travel_guides/berlitz1/WhatToMadeira.txt
+travel_guides/berlitz1/WhatToMalaysia.txt
+travel_guides/berlitz1/WhatToMallorca.txt
+travel_guides/berlitz1/WhereToDublin.txt
+travel_guides/berlitz1/WhereToEdinburgh.txt
+travel_guides/berlitz1/WhereToEgypt.txt
+travel_guides/berlitz1/WhereToFWI.txt
+travel_guides/berlitz1/WhereToFrance.txt
+travel_guides/berlitz1/WhereToGreek.txt
+travel_guides/berlitz1/WhereToHawaii.txt
+travel_guides/berlitz1/WhereToHongKong.txt
+travel_guides/berlitz1/WhereToIbiza.txt
+travel_guides/berlitz1/WhereToIndia.txt
+travel_guides/berlitz1/WhereToIsrael.txt
+travel_guides/berlitz1/WhereToIstanbul.txt
+travel_guides/berlitz1/WhereToItaly.txt
+travel_guides/berlitz1/WhereToJapan.txt
+travel_guides/berlitz1/WhereToJerusalem.txt
+travel_guides/berlitz1/WhereToLakeDistrict.txt
+travel_guides/berlitz1/WhereToLosAngeles.txt
+travel_guides/berlitz1/WhereToMadeira.txt
+travel_guides/berlitz1/WhereToMadrid.txt
+travel_guides/berlitz1/WhereToMalaysia.txt
+travel_guides/berlitz1/WhereToMallorca.txt
+travel_guides/berlitz2/Algarve-History.txt
+travel_guides/berlitz2/Algarve-Intro.txt
+travel_guides/berlitz2/Algarve-WhatToDo.txt
+travel_guides/berlitz2/Algarve-WhereToGo.txt
+travel_guides/berlitz2/Amsterdam-History.txt
+travel_guides/berlitz2/Amsterdam-Intro.txt
+travel_guides/berlitz2/Amsterdam-WhatToDo.txt
+travel_guides/berlitz2/Amsterdam-WhereToGo.txt
+travel_guides/berlitz2/Athens-History.txt
+travel_guides/berlitz2/Athens-Intro.txt
+travel_guides/berlitz2/Athens-WhatToDo.txt
+travel_guides/berlitz2/Athens-WhereToGo.txt
+travel_guides/berlitz2/Bahamas-History.txt
+travel_guides/berlitz2/Bahamas-Intro.txt
+travel_guides/berlitz2/Bahamas-WhatToDo.txt
+travel_guides/berlitz2/Bahamas-WhereToGo.txt
+travel_guides/berlitz2/Bali-History.txt
+travel_guides/berlitz2/Bali-WhatToDo.txt
+travel_guides/berlitz2/Bali-WhereToGo.txt
+travel_guides/berlitz2/Barcelona-History.txt
+travel_guides/berlitz2/Barcelona-WhatToDo.txt
+travel_guides/berlitz2/Barcelona-WhereToGo.txt
+travel_guides/berlitz2/Beijing-History.txt
+travel_guides/berlitz2/Beijing-WhatToDo.txt
+travel_guides/berlitz2/Beijing-WhereToGo.txt
+travel_guides/berlitz2/Berlin-History.txt
+travel_guides/berlitz2/Berlin-WhatToDo.txt
+travel_guides/berlitz2/Berlin-WhereToGo.txt
+travel_guides/berlitz2/Bermuda-WhatToDo.txt
+travel_guides/berlitz2/Bermuda-WhereToGo.txt
+travel_guides/berlitz2/Bermuda-history.txt
+travel_guides/berlitz2/Boston-WhereToGo.txt
+travel_guides/berlitz2/Budapest-History.txt
+travel_guides/berlitz2/Budapest-WhatToDo.txt
+travel_guides/berlitz2/Budapest-WhereoGo.txt
+travel_guides/berlitz2/California-History.txt
+travel_guides/berlitz2/California-WhatToDo.txt
+travel_guides/berlitz2/California-WhereToGo.txt
+travel_guides/berlitz2/Canada-History.txt
+travel_guides/berlitz2/Canada-WhereToGo.txt
+travel_guides/berlitz2/CanaryIslands-History.txt
+travel_guides/berlitz2/CanaryIslands-WhatToDo.txt
+travel_guides/berlitz2/CanaryIslands-WhereToGo.txt
+travel_guides/berlitz2/Cancun-History.txt
+travel_guides/berlitz2/Cancun-WhatToDo.txt
+travel_guides/berlitz2/Cancun-WhereToGo.txt
+travel_guides/berlitz2/China-History.txt
+travel_guides/berlitz2/China-WhatToDo.txt
+travel_guides/berlitz2/China-WhereToGo.txt
+travel_guides/berlitz2/Costa-History.txt
+travel_guides/berlitz2/Costa-WhatToDo.txt
+travel_guides/berlitz2/Costa-WhereToGo.txt
+travel_guides/berlitz2/CostaBlanca-History.txt
+travel_guides/berlitz2/CostaBlanca-WhatToDo.txt
+travel_guides/berlitz2/Crete-History.txt
+travel_guides/berlitz2/Crete-WhatToDo.txt
+travel_guides/berlitz2/Crete-WhereToGo.txt
+travel_guides/berlitz2/CstaBlanca-WhereToGo.txt
+travel_guides/berlitz2/Cuba-History.txt
+travel_guides/berlitz2/Cuba-WhatToDo.txt
+travel_guides/berlitz2/Cuba-WhereToGo.txt
+travel_guides/berlitz2/Nepal-History.txt
+travel_guides/berlitz2/Nepal-WhatToDo.txt
+travel_guides/berlitz2/Nepal-WhereToGo.txt
+travel_guides/berlitz2/NewOrleans-History.txt
+travel_guides/berlitz2/Paris-WhatToDo.txt
+travel_guides/berlitz2/Paris-WhereToGo.txt
+travel_guides/berlitz2/Poland-History.txt
+travel_guides/berlitz2/Poland-WhatToDo.txt
+travel_guides/berlitz2/Portugal-History.txt
+travel_guides/berlitz2/Portugal-WhatToDo.txt
+travel_guides/berlitz2/Portugal-WhereToGo.txt
+travel_guides/berlitz2/PuertoRico-History.txt
+travel_guides/berlitz2/PuertoRico-WhatToDo.txt
+travel_guides/berlitz2/PuertoRico-WhereToGo.txt
+travel_guides/berlitz2/Vallarta-History.txt
+travel_guides/berlitz2/Vallarta-WhatToDo.txt
+travel_guides/berlitz2/Vallarta-WhereToGo.txt
+```
+Command Syntax: `grep -v -r -l "clothes"` from within the `written_2` directory.  
+#### Example 2: Method 3.1, but with the inverse modifier  
+In this example, we will be seeing how many lines can be counted in each file that do not contain the string "Ryan". As we have already found before, no file contains the "Ryan" string, so the count that will be outputted are just the number of lines in each file, making this specific command nothing more than a `wc` method with extra steps:  
+![Image](./images/greppt7.JPG)  
+![Image](./images/greppt8.JPG)  
+![Image](./images/greppt9.JPG)  
+Command Syntax: `grep -v -c -r "Ryan" ./non-fiction` from within the `written_2` directory.  
+###### Sources Used: [Different grep commands](https://phoenixnap.com/kb/grep-command-linux-unix-examples#ftoc-heading-3) | [Practical Grep Commands](https://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/) | [CSE 15L WI23 PAGE](https://ucsd-cse15l-w23.github.io/)  
 # Happy Coding!
