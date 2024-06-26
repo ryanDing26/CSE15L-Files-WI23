@@ -284,5 +284,5 @@ In this example, we will be seeing how many lines can be counted in each file th
 ![Image](./images/greppt8.JPG)  
 ![Image](./images/greppt9.JPG)  
 Command Syntax: `grep -v -c -r "Ryan" ./non-fiction` from within the `written_2` directory.  
-##### Sources Used: [Different grep commands](https://phoenixnap.com/kb/grep-command-linux-unix-examples#ftoc-heading-3) | [Practical Grep Commands](https://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/) | [CSE 15L WI23 PAGE](https://ucsd-cse15l-w23.github.io/)  
+###### Sources Used: [Different grep commands](https://phoenixnap.com/kb/grep-command-linux-unix-examples#ftoc-heading-3) | [Practical Grep Commands](https://www.thegeekstuff.com/2009/03/15-practical-unix-grep-command-examples/) | [CSE 15L WI23 PAGE](https://ucsd-cse15l-w23.github.io/)  
 # Happy Coding!
